@@ -1,0 +1,25 @@
+current directory: /Users/josh/htdocs/mpd-calculator-api/vendor/bundle/gems/puma-3.4.0/ext/puma_http11
+/Users/josh/.rbenv/versions/2.3.0/bin/ruby -r ./siteconf20160712-25239-1ffxq8y.rb extconf.rb
+checking for BIO_read() in -lcrypto... yes
+checking for SSL_CTX_new() in -lssl... yes
+checking for openssl/bio.h... no
+creating Makefile
+
+To see why this extension failed to compile, please check the mkmf.log which can be found here:
+
+  /Users/josh/htdocs/mpd-calculator-api/vendor/bundle/extensions/x86_64-darwin-15/2.3.0-static/puma-3.4.0/mkmf.log
+
+current directory: /Users/josh/htdocs/mpd-calculator-api/vendor/bundle/gems/puma-3.4.0/ext/puma_http11
+make "DESTDIR=" clean
+
+current directory: /Users/josh/htdocs/mpd-calculator-api/vendor/bundle/gems/puma-3.4.0/ext/puma_http11
+make "DESTDIR="
+compiling http11_parser.c
+compiling io_buffer.c
+compiling mini_ssl.c
+compiling puma_http11.c
+linking shared-object puma/puma_http11.bundle
+
+current directory: /Users/josh/htdocs/mpd-calculator-api/vendor/bundle/gems/puma-3.4.0/ext/puma_http11
+make "DESTDIR=" install
+/usr/bin/install -c -m 0755 puma_http11.bundle ./.gem.20160712-25239-k3fxow/puma
