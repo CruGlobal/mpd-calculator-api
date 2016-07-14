@@ -19,11 +19,14 @@ default: &default
   encoding: unicode
   # For details on connection pooling, see rails configuration guide
   # http://guides.rubyonrails.org/configuring.html#database-pooling
-  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  host: <%= ENV['DB_PORT_5432_TCP_ADDR'] %>
+  pool: <%= ENV['DB_ENV_POSTGRESQL_POOL'] || 25 %>
+  database: <%= ENV['DB_ENV_POSTGRESQL_DB'] || 'cru' %>
+  username: <%= ENV['DB_ENV_POSTGRESQL_USER'] %>
+  password: <%= ENV['DB_ENV_POSTGRESQL_PASS'] %>
 
 development:
   <<: *default
-  database: mpd-calculator-api
 
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.
@@ -80,6 +83,4 @@ test:
 #
 production:
   <<: *default
-  database: mpd-calculator-api_production
-  username: mpd-calculator-api
-  password: <%= ENV['MPD-CALCULATOR-API_DATABASE_PASSWORD'] %>
+
