@@ -1,5 +1,5 @@
 PATH
-  remote: /Users/brian/src/rails/fe
+  remote: /home/dev/repos/fe
   specs:
     fe (1.0.0)
       aasm (~> 3.4.0)
