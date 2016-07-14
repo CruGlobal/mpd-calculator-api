@@ -15,7 +15,7 @@ ActiveRecord::Schema.define(version: 20160713123973) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "fe_addresses", force: :cascade do |t|
+  create_table "addresses", force: :cascade do |t|
     t.datetime "startdate"
     t.datetime "enddate"
     t.string   "address1"
@@ -32,7 +32,7 @@ ActiveRecord::Schema.define(version: 20160713123973) do
     t.datetime "updated_at"
   end
 
-  create_table "fe_answer_sheet_question_sheets", force: :cascade do |t|
+  create_table "answer_sheet_question_sheets", force: :cascade do |t|
     t.integer  "answer_sheet_id"
     t.integer  "question_sheet_id"
     t.datetime "created_at"
@@ -40,7 +40,7 @@ ActiveRecord::Schema.define(version: 20160713123973) do
     t.index ["answer_sheet_id", "question_sheet_id"], name: "answer_sheet_question_sheet", using: :btree
   end
 
-  create_table "fe_answers", force: :cascade do |t|
+  create_table "answers", force: :cascade do |t|
     t.integer  "answer_sheet_id",         null: false
     t.integer  "question_id",             null: false
     t.text     "value"
@@ -53,7 +53,7 @@ ActiveRecord::Schema.define(version: 20160713123973) do
     t.index ["answer_sheet_id", "question_id"], name: "answer_sheet_question", using: :btree
   end
 
-  create_table "fe_applications", force: :cascade do |t|
+  create_table "budgets", force: :cascade do |t|
     t.integer  "applicant_id"
     t.string   "status"
     t.datetime "submitted_at"
@@ -63,7 +63,7 @@ ActiveRecord::Schema.define(version: 20160713123973) do
     t.index ["applicant_id"], name: "question_sheet_id", using: :btree
   end
 
-  create_table "fe_conditions", force: :cascade do |t|
+  create_table "conditions", force: :cascade do |t|
     t.integer  "question_sheet_id",             null: false
     t.integer  "trigger_id",                    null: false
     t.string   "expression",        limit: 255, null: false
@@ -71,13 +71,13 @@ ActiveRecord::Schema.define(version: 20160713123973) do
     t.integer  "toggle_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.index ["question_sheet_id"], name: "index_fe_conditions_on_question_sheet_id", using: :btree
-    t.index ["toggle_id"], name: "index_fe_conditions_on_toggle_id", using: :btree
-    t.index ["toggle_page_id"], name: "index_fe_conditions_on_toggle_page_id", using: :btree
-    t.index ["trigger_id"], name: "index_fe_conditions_on_trigger_id", using: :btree
+    t.index ["question_sheet_id"], name: "index_conditions_on_question_sheet_id", using: :btree
+    t.index ["toggle_id"], name: "index_conditions_on_toggle_id", using: :btree
+    t.index ["toggle_page_id"], name: "index_conditions_on_toggle_page_id", using: :btree
+    t.index ["trigger_id"], name: "index_conditions_on_trigger_id", using: :btree
   end
 
-  create_table "fe_elements", force: :cascade do |t|
+  create_table "elements", force: :cascade do |t|
     t.integer  "question_grid_id"
     t.string   "kind",                      limit: 40,                  null: false
     t.string   "style",                     limit: 40
@@ -111,12 +111,12 @@ ActiveRecord::Schema.define(version: 20160713123973) do
     t.text     "tip_translations"
     t.text     "content_translations"
     t.boolean  "share",                                 default: false
-    t.index ["conditional_id"], name: "index_fe_elements_on_conditional_id", using: :btree
-    t.index ["question_grid_id"], name: "index_fe_elements_on_question_grid_id", using: :btree
-    t.index ["slug"], name: "index_fe_elements_on_slug", using: :btree
+    t.index ["conditional_id"], name: "index_elements_on_conditional_id", using: :btree
+    t.index ["question_grid_id"], name: "index_elements_on_question_grid_id", using: :btree
+    t.index ["slug"], name: "index_elements_on_slug", using: :btree
   end
 
-  create_table "fe_email_templates", force: :cascade do |t|
+  create_table "email_templates", force: :cascade do |t|
     t.string   "name",       limit: 1000, null: false
     t.text     "content"
     t.boolean  "enabled"
@@ -125,7 +125,7 @@ ActiveRecord::Schema.define(version: 20160713123973) do
     t.datetime "updated_at"
   end
 
-  create_table "fe_page_elements", force: :cascade do |t|
+  create_table "page_elements", force: :cascade do |t|
     t.integer  "page_id"
     t.integer  "element_id"
     t.integer  "position"
@@ -134,7 +134,7 @@ ActiveRecord::Schema.define(version: 20160713123973) do
     t.index ["page_id", "element_id"], name: "page_element", using: :btree
   end
 
-  create_table "fe_pages", force: :cascade do |t|
+  create_table "pages", force: :cascade do |t|
     t.integer  "question_sheet_id",                             null: false
     t.string   "label",              limit: 60,                 null: false
     t.integer  "number"
@@ -146,7 +146,7 @@ ActiveRecord::Schema.define(version: 20160713123973) do
     t.text     "label_translations"
   end
 
-  create_table "fe_people", force: :cascade do |t|
+  create_table "people", force: :cascade do |t|
     t.string   "first_name"
     t.string   "last_name"
     t.integer  "user_id"
@@ -155,7 +155,20 @@ ActiveRecord::Schema.define(version: 20160713123973) do
     t.datetime "updated_at"
   end
 
-  create_table "fe_question_sheets", force: :cascade do |t|
+  create_table "phone_numbers", force: :cascade do |t|
+    t.string   "number"
+    t.string   "extensions"
+    t.integer  "person_id"
+    t.string   "location"
+    t.boolean  "primary"
+    t.string   "txt_to_email"
+    t.integer  "carrier_id"
+    t.datetime "email_updated_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "question_sheets", force: :cascade do |t|
     t.string   "label",      limit: 100,                 null: false
     t.boolean  "archived",               default: false
     t.datetime "created_at"
@@ -163,7 +176,7 @@ ActiveRecord::Schema.define(version: 20160713123973) do
     t.text     "languages"
   end
 
-  create_table "fe_references", force: :cascade do |t|
+  create_table "references", force: :cascade do |t|
     t.integer  "question_id"
     t.integer  "applicant_answer_sheet_id"
     t.datetime "email_sent_at"
@@ -183,28 +196,15 @@ ActiveRecord::Schema.define(version: 20160713123973) do
     t.integer  "question_sheet_id"
     t.boolean  "visible"
     t.string   "visibility_cache_key"
-    t.index ["applicant_answer_sheet_id"], name: "index_fe_references_on_applicant_answer_sheet_id", using: :btree
-    t.index ["question_id"], name: "index_fe_references_on_question_id", using: :btree
+    t.index ["applicant_answer_sheet_id"], name: "index_references_on_applicant_answer_sheet_id", using: :btree
+    t.index ["question_id"], name: "index_references_on_question_id", using: :btree
   end
 
-  create_table "fe_users", force: :cascade do |t|
+  create_table "users", force: :cascade do |t|
     t.integer  "user_id"
     t.datetime "last_login"
     t.string   "type"
     t.string   "role"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "phone_numbers", force: :cascade do |t|
-    t.string   "number"
-    t.string   "extensions"
-    t.integer  "person_id"
-    t.string   "location"
-    t.boolean  "primary"
-    t.string   "txt_to_email"
-    t.integer  "carrier_id"
-    t.datetime "email_updated_at"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
