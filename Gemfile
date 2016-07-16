@@ -39,4 +39,4 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'dotenv-rails'
 
 # gem 'fe', github: 'cruglobal/fe', branch: 'api'
-gem 'fe', path: '/Users/josh/htdocs/fe'
+gem 'fe', path: '/home/dev/github/fe'

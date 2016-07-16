@@ -1,5 +1,5 @@
 PATH
-  remote: /Users/josh/htdocs/fe
+  remote: /home/dev/github/fe
   specs:
     fe (2.0.0)
       aasm (~> 3.4.0)
