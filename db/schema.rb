@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160718102233) do
+ActiveRecord::Schema.define(version: 20160718102234) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -173,12 +173,12 @@ ActiveRecord::Schema.define(version: 20160718102233) do
 
   create_table "question_sheets", force: :cascade do |t|
     t.string   "label",              limit: 200,                 null: false
-    t.boolean  "archived",                       default: false
+    t.boolean  "archived",                       default: true
     t.datetime "created_at"
     t.datetime "updated_at"
     t.text     "languages"
     t.string   "description"
-    t.boolean  "is_global"
+    t.boolean  "is_global",                      default: false
     t.string   "assessment_formula"
     t.string   "subsidy_formula"
     t.string   "currency_symbol"

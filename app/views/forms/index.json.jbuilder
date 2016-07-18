@@ -2,7 +2,7 @@ json.array! @question_sheets do |qs|
 json.mpd_def_id qs.id
   json.name qs.label
   json.description qs.label
-  json.is_global true #TODO what needs to be default?
+  json.is_global qs.is_global
   json.active !qs.archived
   json.assessment_formula qs.assessment_formula
   json.subsidy_formula qs.subsidy_formula
