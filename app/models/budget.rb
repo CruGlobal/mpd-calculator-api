@@ -1,3 +1,3 @@
-class Budget  < ActiveRecord::Base
+class Budget  < Fe::AnswerSheet
 
 end
