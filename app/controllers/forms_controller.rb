@@ -2,7 +2,7 @@ class FormsController < ApplicationController
   def index
     #TODO filter by ministry id
     @question_sheets = Fe::QuestionSheet.all
-    #render json: question_sheets
+
   end
 
   def show

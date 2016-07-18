@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160713123973) do
+ActiveRecord::Schema.define(version: 20160718102233) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -111,6 +111,8 @@ ActiveRecord::Schema.define(version: 20160713123973) do
     t.text     "tip_translations"
     t.text     "content_translations"
     t.boolean  "share",                                 default: false
+    t.boolean  "min"
+    t.string   "max"
     t.index ["conditional_id"], name: "index_elements_on_conditional_id", using: :btree
     t.index ["question_grid_id"], name: "index_elements_on_question_grid_id", using: :btree
     t.index ["slug"], name: "index_elements_on_slug", using: :btree
@@ -135,15 +137,16 @@ ActiveRecord::Schema.define(version: 20160713123973) do
   end
 
   create_table "pages", force: :cascade do |t|
-    t.integer  "question_sheet_id",                             null: false
-    t.string   "label",              limit: 60,                 null: false
+    t.integer  "question_sheet_id",                              null: false
+    t.string   "label",              limit: 200,                 null: false
     t.integer  "number"
-    t.boolean  "no_cache",                      default: false
-    t.boolean  "hidden",                        default: false
+    t.boolean  "no_cache",                       default: false
+    t.boolean  "hidden",                         default: false
     t.datetime "created_at"
     t.datetime "updated_at"
     t.text     "all_element_ids"
     t.text     "label_translations"
+    t.string   "total_mode"
   end
 
   create_table "people", force: :cascade do |t|
@@ -169,11 +172,18 @@ ActiveRecord::Schema.define(version: 20160713123973) do
   end
 
   create_table "question_sheets", force: :cascade do |t|
-    t.string   "label",      limit: 100,                 null: false
-    t.boolean  "archived",               default: false
+    t.string   "label",              limit: 200,                 null: false
+    t.boolean  "archived",                       default: false
     t.datetime "created_at"
     t.datetime "updated_at"
     t.text     "languages"
+    t.string   "description"
+    t.boolean  "is_global"
+    t.string   "assessment_formula"
+    t.string   "subsidy_formula"
+    t.string   "currency_symbol"
+    t.string   "currency_code"
+    t.string   "compliance"
   end
 
   create_table "references", force: :cascade do |t|
