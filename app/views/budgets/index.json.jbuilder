@@ -16,11 +16,11 @@ json.array! @budgets do |budget|
   json.total_to_raise 3300
   json.current_support_level 3000
 
-  json.answers budget.answers_by_question do |answer|
-    json.mpd_answer_id 1
-    json.mpd_question_id 1
+  json.answers budget.answers do |answer|
+    json.mpd_answer_id answer.id
+    json.mpd_question_id answer.question_id
     json.name "Salary"
-    json.value 2000
+    json.value answer.value
     json.tax 300
   end
 
