@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
 
-  # MInistries end point
-  resources :ministries
+  # Ministries end point
+  resources :ministries, only: [:index]
 
   # Forms end point
   resources :forms

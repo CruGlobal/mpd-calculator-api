@@ -43,3 +43,10 @@ gem 'fe', path: '/home/dev/github/fe'
 
 # HTTP access control (CORS)
 gem 'rack-cors', require: 'rack/cors'
+
+# Global Registry
+gem 'global_registry'
+
+# Cru Redis lib
+gem 'cru_lib', git: 'https://github.com/CruGlobal/cru_lib.git'
+gem 'active_model_serializers', '=0.10.0.rc4'

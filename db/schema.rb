@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160718102234) do
+ActiveRecord::Schema.define(version: 20160719135753) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -51,6 +51,14 @@ ActiveRecord::Schema.define(version: 20160718102234) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.index ["answer_sheet_id", "question_id"], name: "answer_sheet_question", using: :btree
+  end
+
+  create_table "areas", force: :cascade do |t|
+    t.uuid     "gr_id"
+    t.string   "name"
+    t.string   "code"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "budgets", force: :cascade do |t|
@@ -125,6 +133,17 @@ ActiveRecord::Schema.define(version: 20160718102234) do
     t.string   "subject"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "ministries", force: :cascade do |t|
+    t.uuid     "gr_id"
+    t.string   "name"
+    t.string   "min_code"
+    t.string   "gp_key"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer  "area_id"
+    t.index ["area_id"], name: "index_ministries_on_area_id", using: :btree
   end
 
   create_table "page_elements", force: :cascade do |t|
@@ -219,4 +238,5 @@ ActiveRecord::Schema.define(version: 20160718102234) do
     t.datetime "updated_at"
   end
 
+  add_foreign_key "ministries", "areas", on_update: :cascade, on_delete: :nullify
 end

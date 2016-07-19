@@ -19,7 +19,7 @@ json.array! @budgets do |budget|
   json.answers budget.answers do |answer|
     json.mpd_answer_id answer.id
     json.mpd_question_id answer.question_id
-    json.name "Salary"
+    json.name answer.question.label
     json.value answer.value
     json.tax 300
   end
