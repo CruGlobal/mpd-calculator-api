@@ -40,3 +40,6 @@ gem 'dotenv-rails'
 
 # gem 'fe', github: 'cruglobal/fe', branch: 'api'
 gem 'fe', path: '/home/dev/github/fe'
+
+# HTTP access control (CORS)
+gem 'rack-cors', require: 'rack/cors'
