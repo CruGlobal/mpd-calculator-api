@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/CruGlobal/cru_lib.git
-  revision: 8da4a0abb7195c0ad4e23aaf26e55ead312c441a
+  revision: 8b2d89131b5e22ceb56f1e29f1f31c3cc1ad1821
   specs:
     cru_lib (0.0.6)
       active_model_serializers

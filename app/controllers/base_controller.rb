@@ -13,7 +13,7 @@
       render(
         json: ApiError.new(message: message),
         status: options[:status] || :bad_request,
-        serializer: V1::ApiErrorSerializer
+        serializer: ApiErrorSerializer
       )
     end
 
@@ -22,7 +22,7 @@
     end
 
     def bool_value(value)
-      ActiveRecord::Type::Boolean.new.type_cast_from_user(value)
+      ActiveRecord::Type::Boolean.new.cast(value)
     end
   end
 
