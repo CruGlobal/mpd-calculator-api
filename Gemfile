@@ -51,3 +51,7 @@ gem 'global_registry'
 # Cru Redis lib
 gem 'cru_lib', git: 'https://github.com/CruGlobal/cru_lib.git'
 gem 'active_model_serializers', '=0.10.0.rc4'
+
+group :test do
+  gem 'factory_girl_rails'
+end

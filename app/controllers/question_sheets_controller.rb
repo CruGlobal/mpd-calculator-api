@@ -1,5 +1,5 @@
 class QuestionSheetsController < ApplicationController
-  #before_action :authenticate_request
+
 
   def index
 
@@ -37,7 +37,7 @@ class QuestionSheetsController < ApplicationController
   def filter_by_ministry
     #TODO filter by ministry id
     ministry_id = params[:ministry_id]
-    @question_sheets = QuestionSheet.all
+    @question_sheets = Fe::QuestionSheet.all
   end
 
   #filter returns only active question_sheets
