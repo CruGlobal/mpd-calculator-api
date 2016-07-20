@@ -63,6 +63,10 @@ development:
 test:
   <<: *default
   database: mpd-calculator-api_test
+  host: <%= ENV['DB_PORT_5432_TCP_ADDR_TEST'] %>
+  database: <%= ENV['DB_ENV_POSTGRESQL_DB_TEST'] || 'mdp_calc_test' %>
+  username: <%= ENV['DB_ENV_POSTGRESQL_USER_TEST'] %>
+  password: <%= ENV['DB_ENV_POSTGRESQL_PASS_TEST'] %>
 
 # As with config/secrets.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is
