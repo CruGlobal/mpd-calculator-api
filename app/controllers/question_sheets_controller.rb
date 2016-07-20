@@ -3,9 +3,6 @@ class QuestionSheetsController < ApplicationController
 
   def index
 
-    #TODO token
-    token = params[:token]
-
     refresh_forms if params[:refresh] == 'true'
     filter_by_ministry
     filter_inactive unless params[:show_inactive] == 'true'

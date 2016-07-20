@@ -145,13 +145,11 @@ ActiveRecord::Schema.define(version: 20160719161900) do
     t.string   "gp_key"
     t.datetime "created_at",         null: false
     t.datetime "updated_at",         null: false
-    t.integer  "area_id"
     t.string   "assessment_formula"
     t.string   "subsidy_formula"
     t.string   "currency_symbol"
     t.string   "currency_code"
     t.string   "compliance"
-    t.index ["area_id"], name: "index_ministries_on_area_id", using: :btree
     t.index ["gr_id"], name: "index_ministries_on_gr_id", unique: true, using: :btree
     t.index ["min_code"], name: "index_ministries_on_min_code", unique: true, using: :btree
   end
@@ -251,5 +249,4 @@ ActiveRecord::Schema.define(version: 20160719161900) do
     t.datetime "updated_at"
   end
 
-  add_foreign_key "ministries", "areas", on_update: :cascade, on_delete: :nullify
 end

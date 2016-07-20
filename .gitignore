@@ -20,3 +20,6 @@ vendor
 
 # Ignore local env variables
 .env.local
+
+# Ignore files for testing coverage
+/coverage

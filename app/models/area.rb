@@ -1,4 +1,4 @@
-areas.rb# frozen_string_literal: true
+# frozen_string_literal: true
 class Area < ActiveRecord::Base
   class << self
     def for_code(area_code)
