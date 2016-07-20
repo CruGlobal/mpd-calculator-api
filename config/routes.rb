@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
 
+  # Token end point
+  resources :token, only: [:index]
+
+
   # Ministries end point
   resources :ministries, only: [:index]
 
