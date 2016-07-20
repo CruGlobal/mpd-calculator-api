@@ -6,6 +6,8 @@ class Ministry < ActiveRecord::Base
 
   belongs_to :area
   has_many :people
+  has_many :question_sheets, through: :ministry_question_sheets
+  has_many :ministry_question_sheets
 
   # Ministry specific GR client
   def gr_ministry_client

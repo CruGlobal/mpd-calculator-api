@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160719135753) do
+ActiveRecord::Schema.define(version: 20160719161900) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -59,6 +59,8 @@ ActiveRecord::Schema.define(version: 20160719135753) do
     t.string   "code"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["code"], name: "index_areas_on_code", unique: true, using: :btree
+    t.index ["gr_id"], name: "index_areas_on_gr_id", unique: true, using: :btree
   end
 
   create_table "budgets", force: :cascade do |t|
@@ -121,6 +123,7 @@ ActiveRecord::Schema.define(version: 20160719135753) do
     t.boolean  "share",                                 default: false
     t.boolean  "min"
     t.string   "max"
+    t.integer  "page_id"
     t.index ["conditional_id"], name: "index_elements_on_conditional_id", using: :btree
     t.index ["question_grid_id"], name: "index_elements_on_question_grid_id", using: :btree
     t.index ["slug"], name: "index_elements_on_slug", using: :btree
@@ -140,10 +143,24 @@ ActiveRecord::Schema.define(version: 20160719135753) do
     t.string   "name"
     t.string   "min_code"
     t.string   "gp_key"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
     t.integer  "area_id"
+    t.string   "assessment_formula"
+    t.string   "subsidy_formula"
+    t.string   "currency_symbol"
+    t.string   "currency_code"
+    t.string   "compliance"
     t.index ["area_id"], name: "index_ministries_on_area_id", using: :btree
+    t.index ["gr_id"], name: "index_ministries_on_gr_id", unique: true, using: :btree
+    t.index ["min_code"], name: "index_ministries_on_min_code", unique: true, using: :btree
+  end
+
+  create_table "ministry_question_sheets", force: :cascade do |t|
+    t.integer "ministry_id"
+    t.integer "question_sheet_id"
+    t.boolean "active"
+    t.index ["ministry_id", "question_sheet_id"], name: "ministry_question_sheet", using: :btree
   end
 
   create_table "page_elements", force: :cascade do |t|
@@ -191,18 +208,14 @@ ActiveRecord::Schema.define(version: 20160719135753) do
   end
 
   create_table "question_sheets", force: :cascade do |t|
-    t.string   "label",              limit: 200,                 null: false
-    t.boolean  "archived",                       default: true
+    t.string   "label",       limit: 200,                 null: false
+    t.boolean  "archived",                default: true
     t.datetime "created_at"
     t.datetime "updated_at"
     t.text     "languages"
     t.string   "description"
-    t.boolean  "is_global",                      default: false
-    t.string   "assessment_formula"
-    t.string   "subsidy_formula"
-    t.string   "currency_symbol"
-    t.string   "currency_code"
-    t.string   "compliance"
+    t.boolean  "is_global",               default: false
+    t.string   "created_by"
   end
 
   create_table "references", force: :cascade do |t|

@@ -5,9 +5,9 @@ Rails.application.routes.draw do
 
 
   # Forms end point
-  resources :forms
-  get '/mpd_def/:id', to: 'forms#show'
-  get '/mpd_def', to: 'forms#index'
+  resources :question_sheets
+  get '/mpd_def/:id', to: 'question_sheets#show'
+  get '/mpd_def', to: 'question_sheets#index'
 
 
   # Budgets end point

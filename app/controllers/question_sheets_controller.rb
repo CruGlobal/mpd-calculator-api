@@ -1,9 +1,9 @@
-class FormsController < ApplicationController
+class QuestionSheetsController < ApplicationController
   #before_action :authenticate_request
 
   def index
 
-    #TODO token logic is this really optional?
+    #TODO token
     token = params[:token]
 
     refresh_forms if params[:refresh] == 'true'
@@ -19,7 +19,7 @@ class FormsController < ApplicationController
     token = params[:token]
 
 
-    @form = Form.find(params[:id])
+    @question_sheet = QuestionSheet.find(params[:id])
   end
 
   def update
@@ -40,17 +40,17 @@ class FormsController < ApplicationController
   def filter_by_ministry
     #TODO filter by ministry id
     ministry_id = params[:ministry_id]
-    @forms = Form.all
+    @question_sheets = QuestionSheet.all
   end
 
-  #filter returns only active forms
+  #filter returns only active question_sheets
   def filter_inactive
-    @forms = @forms.where(archived: false)
+    @question_sheets = @question_sheets.where(archived: false)
   end
 
-  #filter return only non-global forms
+  #filter return only non-global question_sheets
   def filter_global
-    @forms = @forms.where(is_global: false)
+    @question_sheets = @question_sheets.where(is_global: false)
   end
 
   def refresh_forms
