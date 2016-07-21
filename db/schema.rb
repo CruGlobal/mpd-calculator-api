@@ -165,10 +165,9 @@ ActiveRecord::Schema.define(version: 20160721160400) do
   end
 
   create_table "ministry_question_sheets", force: :cascade do |t|
-    t.integer "ministry_id"
-    t.integer "question_sheet_id"
-    t.boolean "active"
-    t.index ["ministry_id", "question_sheet_id"], name: "ministry_question_sheet", using: :btree
+    t.integer "question_sheet_id",                 null: false
+    t.boolean "active",            default: false, null: false
+    t.uuid    "ministry_id",                       null: false
   end
 
   create_table "page_elements", force: :cascade do |t|
