@@ -9,9 +9,9 @@ json.array! @budgets do |budget|
   json.period_start "2014-07"
   json.status "Draft"
   json.assessment 120
-  json.assessment_formula 120
+  json.assessment_formula budget.question_sheet.ministry.assessment_formula
   json.subsidy 0
-  json.subsidy_formula "%0"
+  json.subsidy_formula budget.question_sheet.ministry.subsidy_formula
   json.total_expense_budget 3300
   json.total_to_raise 3300
   json.current_support_level 3000
@@ -25,3 +25,4 @@ json.array! @budgets do |budget|
   end
 
 end
+
