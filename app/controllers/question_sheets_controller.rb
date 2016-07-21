@@ -1,22 +1,14 @@
 class QuestionSheetsController < ApplicationController
 
-
   def index
-
-    refresh_forms if params[:refresh] == 'true'
-    filter_by_ministry
-    filter_inactive unless params[:show_inactive] == 'true'
-    filter_global unless params[:include_global] == 'true'
-
+    init_active_ministry_qs
+    add_inactive_ministry_qs if params[:show_inactive] == 'true'
+    add_active_global_qs if params[:include_global] == 'true'
+    add_inactive_global_qs if params[:include_global] == 'true' && params[:show_inactive] == 'true'
   end
 
   def show
-
-    #TODO token logic is this really optional?
-    token = params[:token]
-
-
-    @question_sheet = QuestionSheet.find(params[:id])
+    @question_sheet = Fe::QuestionSheet.find(params[:id])
   end
 
   def update
@@ -34,26 +26,27 @@ class QuestionSheetsController < ApplicationController
 
   private
 
-  def filter_by_ministry
-    #TODO filter by ministry id
-    ministry_id = params[:ministry_id]
-    @question_sheets = Fe::QuestionSheet.all
+  def init_active_ministry_qs
+    @question_sheets = (Fe::QuestionSheet
+                            .joins(:ministry_question_sheets)
+                            .where(ministry_question_sheets: { ministry_id: params[:ministry_id], active: true })).to_a
   end
 
-  #filter returns only active question_sheets
-  def filter_inactive
-    @question_sheets = @question_sheets.where(archived: false)
+  def add_inactive_ministry_qs
+    @question_sheets = @question_sheets + (Fe::QuestionSheet
+                            .joins(:ministry_question_sheets)
+                            .where(ministry_question_sheets: { ministry_id: params[:ministry_id], active: false })).to_a
   end
 
-  #filter return only non-global question_sheets
-  def filter_global
-    @question_sheets = @question_sheets.where(is_global: false)
+  def add_active_global_qs
+    @question_sheets = @question_sheets + ( Fe::QuestionSheet
+                            .where(is_global: true, archived: false)).to_a
   end
 
-  def refresh_forms
-    #TODO refresh parameter
+  def add_inactive_global_qs
+    @question_sheets = @question_sheets + ( Fe::QuestionSheet
+                            .where(is_global: true, archived: true)).to_a
   end
-
 
 end
 

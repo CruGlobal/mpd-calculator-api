@@ -4,7 +4,7 @@ class ApplicationController < ActionController::API
   include CruLib::AccessTokenProtectedConcern
 
   before_action :set_default_response_format
-  before_action :authenticate_request
+  #before_action :authenticate_request
 
   protected
 

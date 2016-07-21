@@ -1,4 +1,4 @@
-json.array! @question_sheets do |question_sheet|
+json.array! @question_sheets.each do |question_sheet|
 json.mpd_def_id question_sheet.id
   json.name question_sheet.label
   json.description question_sheet.label
