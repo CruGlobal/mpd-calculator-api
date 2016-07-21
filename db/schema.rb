@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160719161900) do
+ActiveRecord::Schema.define(version: 20160721160400) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -30,6 +30,14 @@ ActiveRecord::Schema.define(version: 20160719161900) do
     t.integer  "person_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "admins", force: :cascade do |t|
+    t.integer  "ministry_id"
+    t.integer  "person_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["ministry_id", "person_id"], name: "admin", using: :btree
   end
 
   create_table "answer_sheet_question_sheets", force: :cascade do |t|
@@ -145,11 +153,13 @@ ActiveRecord::Schema.define(version: 20160719161900) do
     t.string   "gp_key"
     t.datetime "created_at",         null: false
     t.datetime "updated_at",         null: false
+    t.integer  "area_id"
     t.string   "assessment_formula"
     t.string   "subsidy_formula"
     t.string   "currency_symbol"
     t.string   "currency_code"
     t.string   "compliance"
+    t.index ["area_id"], name: "index_ministries_on_area_id", using: :btree
     t.index ["gr_id"], name: "index_ministries_on_gr_id", unique: true, using: :btree
     t.index ["min_code"], name: "index_ministries_on_min_code", unique: true, using: :btree
   end
@@ -186,10 +196,10 @@ ActiveRecord::Schema.define(version: 20160719161900) do
   create_table "people", force: :cascade do |t|
     t.string   "first_name"
     t.string   "last_name"
-    t.integer  "user_id"
     t.boolean  "is_staff"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.uuid     "key_guid"
   end
 
   create_table "phone_numbers", force: :cascade do |t|
@@ -249,4 +259,5 @@ ActiveRecord::Schema.define(version: 20160719161900) do
     t.datetime "updated_at"
   end
 
+  add_foreign_key "ministries", "areas", on_update: :cascade, on_delete: :nullify
 end

@@ -3,27 +3,19 @@
   class MinistriesController < ApplicationController
 
     def index
-      # refresh_ministries if bool_value(params[:refresh])
-      # filter_ministries
-      # render_ministries
+      @person_id = Fe::Person.find_by(key_guid: "4e998424-055b-358c-fb77-4d0cbca466f8")#current_user.key_guid)
+
+      #refresh_ministries if bool_value(params[:refresh])
+      #filter_ministries
+      #render_ministries
       render_ministries_test
     end
 
     private
 
     def filter_ministries
-      @ministries = Ministry.all.includes(:area) # Prefetch areas
-      filter_inactive unless bool_value(params[:show_inactive])
-      filter_profile_only if bool_value(params[:global_profile_only])
+      @ministries = Ministry.all.includes(:area) # Prefetch areas and admins
       @ministries = @ministries.order(name: :asc)
-    end
-
-    def filter_inactive
-      @ministries = @ministries.where(active: true)
-    end
-
-    def filter_profile_only
-      @ministries = @ministries.where.not(gp_key: nil)
     end
 
     def render_ministries

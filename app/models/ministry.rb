@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 class Ministry < ActiveRecord::Base
   DEFAULT_GR_PARAMS = { entity_type: 'ministry', ruleset: 'global_ministries', levels: 0,
-                        fields: 'name,min_code,area:relationship,is_active' }.freeze
+                        fields: 'name,min_code,area:relationship' }.freeze
   GP_SYSTEM_PREFIX = ENV.fetch('GLOBAL_REGISTRY_ACCESS_TOKEN_PREFIX')
 
   belongs_to :area
-  has_many :people
+  has_many :people, through: :admins
   has_many :question_sheets, through: :ministry_question_sheets
   has_many :ministry_question_sheets
 
@@ -80,7 +80,7 @@ class Ministry < ActiveRecord::Base
     def create_or_update_from_entity(entity)
       ministry = find_or_initialize_by(gr_id: entity['id'])
       ministry.area = area_from_entity(entity)
-      ministry.update(name: entity['name'], min_code: entity['min_code'], active: entity['is_active'])
+      ministry.update(name: entity['name'], min_code: entity['min_code'])
       ministry
     end
 
