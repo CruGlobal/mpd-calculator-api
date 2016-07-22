@@ -1,5 +1,6 @@
 class Budget  < Fe::AnswerSheet
 
+  #TODO Extend model to match Jon's old API model
 
 # Budget schema from fe
   # create_table "budgets", force: :cascade do |t|
