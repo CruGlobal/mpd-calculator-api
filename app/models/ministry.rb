@@ -5,6 +5,7 @@ class Ministry < ActiveRecord::Base
   GP_SYSTEM_PREFIX = ENV.fetch('GLOBAL_REGISTRY_ACCESS_TOKEN_PREFIX')
 
   belongs_to :area
+  has_many :admins
   has_many :people, through: :admins
   has_many :question_sheets, through: :ministry_question_sheets
   has_many :ministry_question_sheets
