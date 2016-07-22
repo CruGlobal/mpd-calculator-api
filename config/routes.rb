@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   resources :question_sheets
   get '/mpd_def/:id', to: 'question_sheets#show'
   get '/mpd_def', to: 'question_sheets#index'
+  post '/mpd_def/:id', to: 'question_sheets#create'
 
 
   # Budgets end point
