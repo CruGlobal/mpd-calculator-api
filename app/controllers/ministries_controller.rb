@@ -3,7 +3,7 @@
   class MinistriesController < ApplicationController
 
     def index
-      #@person_id = Fe::Person.find_by(key_guid: "4e998424-055b-358c-fb77-4d0cbca466f8")
+      #@person_id = Fe::Person.find_by(key_guid: "4e998424-055b-358c-fb77-4d0cbca466f8") # Test GUID
       @person_id = Fe::Person.find_by(key_guid: current_user.key_guid)
 
       refresh_ministries if bool_value(params[:refresh])
