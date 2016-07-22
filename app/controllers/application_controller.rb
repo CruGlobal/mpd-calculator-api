@@ -4,12 +4,12 @@ class ApplicationController < ActionController::API
   include CruLib::AccessTokenProtectedConcern
 
   before_action :set_default_response_format
-  #before_action :authenticate_request
+  before_action :authenticate_request
 
   protected
 
   def current_user
-    @access_token
+    @current_user ||= Fe::Person.find_by(key_guid: @access_token.key_guid)
   end
 
   def render_error(message, options = {})

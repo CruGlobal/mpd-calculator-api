@@ -6,7 +6,7 @@ class Ministry < ActiveRecord::Base
 
   belongs_to :area
   has_many :admins
-  has_many :people, through: :admins
+  has_many :people, through: :admins, class_name: Fe::Person
   has_many :question_sheets, through: :ministry_question_sheets
   has_many :ministry_question_sheets
 
