@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160721160400) do
+ActiveRecord::Schema.define(version: 20160722092234) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -167,7 +167,8 @@ ActiveRecord::Schema.define(version: 20160721160400) do
   create_table "ministry_question_sheets", force: :cascade do |t|
     t.integer "question_sheet_id",                 null: false
     t.boolean "active",            default: false, null: false
-    t.uuid    "ministry_id",                       null: false
+    t.uuid    "ministry_gr_id",                    null: false
+    t.index ["ministry_gr_id", "question_sheet_id"], name: "ministry_gr_id_question_sheet", using: :btree
   end
 
   create_table "page_elements", force: :cascade do |t|
