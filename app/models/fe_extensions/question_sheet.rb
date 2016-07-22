@@ -5,6 +5,8 @@ Fe::QuestionSheet.class_eval do
 
 
   validates_length_of :label, maximum: 200
+  validates :label, presence: true
+  validates :description, presence: true
 
   def ministry
     ministries.first || Ministry.new

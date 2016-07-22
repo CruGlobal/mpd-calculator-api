@@ -18,6 +18,9 @@ class QuestionSheetsController < ApplicationController
 
   def create
 
+    new = request.body.read
+    Fe::QuestionSheet.create!(label: new['name'], description: new['description'], is_global: new['is_global'], archived: new['active'] )
+
   end
 
   def destroy
@@ -52,6 +55,7 @@ class QuestionSheetsController < ApplicationController
     @question_sheets = @question_sheets + ( Fe::QuestionSheet
                             .where(is_global: true, archived: true)).to_a
   end
+
 
 end
 
